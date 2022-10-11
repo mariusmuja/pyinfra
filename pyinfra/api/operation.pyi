@@ -1,6 +1,4 @@
-
-import typing
-from typing import Callable, Dict, Generator, Generic, Iterable, List, Mapping, Protocol, overload
+from typing import Callable, Dict, Generator, Generic, Iterable, List, Mapping, Protocol, Tuple, overload
 
 from typing_extensions import ParamSpec
 
@@ -41,7 +39,7 @@ class Operation(Generic[P], Protocol):
         _success_exit_codes: Iterable[int]|None = None,
         _timeout: int|None = None,
         _get_pty: bool|None = None,
-        _stdin: str|list|tuple|None = None,
+        _stdin: str|List[str]|Tuple[str, ...]|None = None,
         name: str|None = None,
         _ignore_errors: bool|None = None,
         _continue_on_error: bool|None = None,
@@ -75,7 +73,7 @@ def add_op(state: State, op_func: Operation[P],
     _success_exit_codes: Iterable[int]|None = None,
     _timeout: int|None = None,
     _get_pty: bool|None = None,
-    _stdin: str|list|tuple|None = None,
+    _stdin: str|List[str]|Tuple[str, ...]|None = None,
     name: str|None = None,
     _ignore_errors: bool|None = None,
     _continue_on_error: bool|None = None,
