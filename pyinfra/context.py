@@ -6,9 +6,12 @@ These variables always represent the current executing pyinfra context.
 """
 
 from contextlib import contextmanager
+from typing import TYPE_CHECKING
 
 from gevent.local import local
 
+if TYPE_CHECKING:
+    from pyinfra.api.host import Host
 
 class container:
     pass
@@ -109,7 +112,7 @@ config = ctx_config.context
 # Hosts are prepared in parallel each in a greenlet, so we use a local to
 # point at different host objects in each greenlet.
 ctx_host = ContextManager("host", LocalContextObject)
-host = ctx_host.context
+host: "Host" = ctx_host.context
 
 
 def init_base_classes():

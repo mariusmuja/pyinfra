@@ -8,6 +8,7 @@ from io import StringIO
 from itertools import filterfalse, tee
 from os import path
 from time import sleep
+from typing import List
 
 from pyinfra import host, state
 from pyinfra.api import FunctionCommand, OperationError, StringCommand, operation
@@ -128,7 +129,7 @@ def wait(port=None):
 
 
 @operation(is_idempotent=False)
-def shell(commands):
+def shell(commands: List[str]):
     """
     Run raw shell code on server during a deploy. If the command would
     modify data that would be in a fact, the fact would not be updated
@@ -155,7 +156,7 @@ def shell(commands):
 
 
 @operation(is_idempotent=False)
-def script(src):
+def script(src: str):
     """
     Upload and execute a local script on the remote host.
 

@@ -2,6 +2,7 @@
 Manage dnf packages and repositories. Note that dnf package names are case-sensitive.
 """
 
+from typing import List
 from pyinfra import host, state
 from pyinfra.api import operation
 from pyinfra.facts.rpm import RpmPackageProvides, RpmPackages
@@ -135,7 +136,7 @@ _update = update  # noqa: E305 (for use below where update is a kwarg)
 
 @operation
 def packages(
-    packages=None,
+    packages: "List[str]|None"=None,
     present=True,
     latest=False,
     update=False,

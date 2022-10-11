@@ -7,6 +7,7 @@ to the deploy state. This is then run later by pyinfra's ``__main__`` or the
 
 from functools import wraps
 from types import FunctionType
+from typing import Dict, List
 
 import pyinfra
 from pyinfra import context, logger
@@ -30,9 +31,9 @@ op_meta_default = object()
 
 
 class OperationMeta(object):
-    combined_output_lines = None
+    combined_output_lines: "Dict[str, str]|None" = None
 
-    def __init__(self, hash=None, commands=None):
+    def __init__(self, hash: "str|None" = None, commands: "List[str]|None" = None):
         # Wrap all the attributes
         commands = commands or []
         self.commands = commands
